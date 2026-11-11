@@ -38,7 +38,7 @@ A feature-packed Personal Workspace with a Concentrix-themed palette.
 - Throw any random little notes you need into the Scratchpad and they are automatically saved LOCALLY, in-case you accidentally close your tab.
 - You can copy and clear the notes in your Scratchpad.
 - To prevent accidental leaks of PII you can also clear your clipboard.
-![Uploading image.png…]()
+<img width="1920" height="945" alt="image" src="https://github.com/user-attachments/assets/6c8a4cb1-0b21-4979-8526-f7936840fb1f" />
 
 
 # How to Use!:
