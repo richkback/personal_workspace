@@ -1,0 +1,2218 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <meta content="#012532" name="theme-color"/>
+  <title>
+   Personal Workspace | Concentrix
+  </title>
+  <style>
+   :root {
+  color-scheme:light;
+  --ink:#092b36;
+  --deep:#012532;
+  --teal:#25e2cc;
+  --teal-strong:#078f88;
+  --muted:#71838a;
+  --line:#dce7e9;
+  --surface:#fff;
+  --canvas:#f2f7f7;
+  --field:#fbfdfd;
+  --field-border:#d9e5e7;
+  --field-text:#183943;
+  --label:#24434c;
+  --hint:#91a0a5;
+  --shadow:0 16px 44px rgba(1,37,50,.07);
+  --soft-teal:rgba(37,226,204,.12);
+  --danger:#c64e58;
+  --success:#168f78;
+}
+[data-theme="dark"] {
+  color-scheme:dark;
+  --ink:#e5f3f4;
+  --deep:#092f3b;
+  --teal:#25e2cc;
+  --teal-strong:#65e8dc;
+  --muted:#9bb0b5;
+  --line:#25464f;
+  --surface:#102f39;
+  --canvas:#081d25;
+  --field:#0b252e;
+  --field-border:#31515a;
+  --field-text:#e2eff0;
+  --label:#d3e4e6;
+  --hint:#91a9ae;
+  --shadow:0 18px 55px rgba(0,0,0,.24);
+  --soft-teal:rgba(37,226,204,.13);
+  --danger:#ff8790;
+  --success:#65d8b9;
+}
+* {
+  box-sizing:border-box
+}
+html {
+  scroll-behavior:smooth
+}
+body {
+  margin:0;
+  min-height:100vh;
+  background:radial-gradient(ellipse at 50% 0%,rgba(37,226,204,.09),transparent 34%),var(--canvas);
+  color:var(--ink);
+  font-family:Inter,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  transition:background .2s,color .2s
+}
+button,input,textarea,select {
+  font:inherit
+}
+button {
+  cursor:pointer
+}
+button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible,[contenteditable="true"]:focus-visible {
+  outline:3px solid rgba(37,226,204,.45);
+  outline-offset:2px
+}
+.app {
+  width:min(1440px,100%);
+  margin:0 auto;
+  padding:22px 28px 30px
+}
+.topbar {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+  margin-bottom:22px
+}
+.brand {
+  display:flex;
+  align-items:center;
+  gap:12px;
+  min-width:220px
+}
+.brand-mark {
+  width:38px;
+  height:38px;
+  flex:none
+}
+.wordmark {
+  font-size:21px;
+  font-weight:780;
+  letter-spacing:-.9px;
+  color:var(--ink)
+}
+.wordmark span {
+  color:var(--teal-strong)
+}
+.brand-sub {
+  margin-top:3px;
+  color:var(--muted);
+  font-size:10px;
+  letter-spacing:1.3px;
+  text-transform:uppercase;
+  font-weight:700
+}
+.topbar-right {
+  display:flex;
+  align-items:center;
+  gap:10px
+}
+.top-date {
+  color:var(--muted);
+  font-size:12px
+}
+.theme-toggle,.icon-btn,.nav-btn,.small-btn,.tab-btn {
+  border:1px solid var(--line);
+  background:var(--surface);
+  color:var(--ink);
+  border-radius:10px;
+  transition:.16s ease
+}
+.theme-toggle {
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding:9px 13px;
+  font-size:12px;
+  font-weight:650
+}
+.theme-toggle:hover,.icon-btn:hover,.small-btn:hover,.tab-btn:hover {
+  border-color:#20b9aa;
+  transform:translateY(-1px)
+}
+.layout {
+  display:grid;
+  grid-template-columns:232px minmax(0,1fr);
+  gap:22px;
+  align-items:start
+}
+.sidebar {
+  position:sticky;
+  top:18px;
+  border:1px solid var(--line);
+  border-radius:17px;
+  background:var(--surface);
+  box-shadow:var(--shadow);
+  padding:16px 12px
+}
+.side-label {
+  padding:5px 10px 11px;
+  color:var(--hint);
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:1.5px;
+  text-transform:uppercase
+}
+.nav-list {
+  display:grid;
+  gap:5px
+}
+.nav-btn {
+  width:100%;
+  display:flex;
+  align-items:center;
+  gap:11px;
+  padding:11px 12px;
+  text-align:left;
+  border-color:transparent;
+  background:transparent;
+  color:var(--muted);
+  font-size:13px;
+  font-weight:650
+}
+.nav-btn svg {
+  width:17px;
+  height:17px;
+  flex:none
+}
+.nav-btn:hover {
+  background:var(--field);
+  color:var(--ink);
+  transform:none
+}
+.nav-btn[aria-current="page"] {
+  background:var(--soft-teal);
+  border-color:rgba(37,226,204,.22);
+  color:var(--teal-strong)
+}
+.sidebar-bottom {
+  margin-top:18px;
+  padding:13px 10px 3px;
+  border-top:1px solid var(--line);
+  color:var(--hint);
+  font-size:10px;
+  line-height:1.6
+}
+.main {
+  min-width:0
+}
+.page-heading {
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:16px;
+  margin:4px 2px 18px
+}
+.eyebrow {
+  margin:0 0 7px;
+  color:var(--teal-strong);
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:1.55px;
+  text-transform:uppercase
+}
+h1 {
+  margin:0;
+  font-size:clamp(25px,3vw,34px);
+  line-height:1.12;
+  letter-spacing:-1.1px;
+  font-weight:750
+}
+.page-description {
+  margin:8px 0 0;
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.5
+}
+.page-actions {
+  display:flex;
+  gap:8px;
+  align-items:center
+}
+.panel {
+  border:1px solid var(--line);
+  border-radius:16px;
+  background:var(--surface);
+  box-shadow:var(--shadow);
+  overflow:hidden
+}
+.panel-pad {
+  padding:22px
+}
+.panel-head {
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:14px;
+  margin-bottom:16px
+}
+.panel-title {
+  margin:0;
+  font-size:15px;
+  font-weight:750;
+  letter-spacing:-.2px
+}
+.panel-subtitle {
+  margin:5px 0 0;
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.45
+}
+.grid-two {
+  display:grid;
+  grid-template-columns:minmax(0,1.15fr) minmax(260px,.85fr);
+  gap:16px
+}
+.stack {
+  display:grid;
+  gap:16px
+}
+.timezone-panel {
+  padding:16px 18px;
+  border:1px solid var(--line);
+  border-radius:13px;
+  background:var(--field);
+  margin-bottom:17px
+}
+.timezone-heading {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:12px;
+  color:var(--muted);
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:1.35px;
+  text-transform:uppercase
+}
+.live {
+  display:flex;
+  align-items:center;
+  gap:7px
+}
+.live-dot {
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:#18b99e;
+  box-shadow:0 0 0 3px rgba(37,226,204,.13)
+}
+.timezone-tabs {
+  display:flex;
+  gap:7px;
+  margin-bottom:12px
+}
+.timezone-tab {
+  flex:1;
+  padding:7px 10px;
+  border:1px solid var(--line);
+  border-radius:8px;
+  background:var(--surface);
+  color:var(--muted);
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:.5px
+}
+.timezone-tab[aria-pressed="true"] {
+  border-color:#16b9aa;
+  background:var(--soft-teal);
+  color:var(--teal-strong)
+}
+.timezone-primary {
+  text-align:center;
+  padding:2px 2px 12px
+}
+.timezone-primary-name {
+  color:var(--muted);
+  font-size:11px;
+  font-weight:650
+}
+.timezone-primary-time {
+  font-size:clamp(29px,4vw,39px);
+  line-height:1.2;
+  font-weight:760;
+  letter-spacing:-1.3px;
+  font-variant-numeric:tabular-nums
+}
+.timezone-primary-date {
+  margin-top:3px;
+  color:var(--muted);
+  font-size:11px
+}
+.timezone-divider {
+  height:1px;
+  background:var(--line);
+  margin-bottom:9px
+}
+.timezone-conversions {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:8px
+}
+.timezone-conversion {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+  padding:8px 10px;
+  border:1px solid var(--line);
+  border-radius:8px;
+  background:var(--surface)
+}
+.timezone-conversion-label {
+  color:var(--muted);
+  font-size:10px;
+  font-weight:750
+}
+.timezone-conversion-time {
+  font-size:12px;
+  font-weight:750;
+  font-variant-numeric:tabular-nums;
+  white-space:nowrap
+}
+.timezone-footnote {
+  margin:9px 0 0;
+  color:var(--hint);
+  font-size:10px;
+  text-align:center
+}
+.field-label {
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  margin:0 0 8px;
+  color:var(--label);
+  font-size:12px;
+  font-weight:700
+}
+.field-hint {
+  color:var(--hint);
+  font-weight:450
+}
+textarea,input,select {
+  width:100%;
+  border:1px solid var(--field-border);
+  border-radius:10px;
+  background:var(--field);
+  color:var(--field-text);
+  padding:11px 13px;
+  transition:border-color .16s,box-shadow .16s
+}
+textarea {
+  resize:vertical;
+  min-height:180px;
+  line-height:1.65
+}
+textarea::placeholder,input::placeholder {
+  color:var(--hint)
+}
+textarea:focus,input:focus,select:focus {
+  outline:none;
+  border-color:#22bcae;
+  box-shadow:0 0 0 3px rgba(37,226,204,.12)
+}
+.primary-btn,.secondary-btn,.danger-btn,.small-btn {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:7px;
+  border-radius:9px;
+  padding:10px 14px;
+  font-size:12px;
+  font-weight:700;
+  transition:.16s
+}
+.primary-btn {
+  border:1px solid var(--deep);
+  background:var(--deep);
+  color:#fff
+}
+.primary-btn:hover {
+  background:#064252;
+  transform:translateY(-1px)
+}
+[data-theme="dark"] .primary-btn {
+  background:var(--teal);
+  border-color:var(--teal);
+  color:#062b35
+}
+[data-theme="dark"] .primary-btn:hover {
+  background:#65f0df
+}
+.secondary-btn,.small-btn {
+  border:1px solid var(--line);
+  background:var(--surface);
+  color:var(--ink)
+}
+.secondary-btn:hover,.small-btn:hover {
+  border-color:#22bcae;
+  background:var(--field)
+}
+.danger-btn {
+  border:1px solid rgba(198,78,88,.25);
+  background:rgba(198,78,88,.07);
+  color:var(--danger)
+}
+.small-btn {
+  padding:7px 10px;
+  font-size:11px
+}
+.actions-row {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  margin-top:12px;
+  flex-wrap:wrap
+}
+.button-row {
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap
+}
+.status {
+  min-height:17px;
+  margin:10px 0 0;
+  color:var(--success);
+  font-size:11px;
+  font-weight:650
+}
+.section {
+  display:none
+}
+.section.active {
+  display:block
+}
+.task-stats {
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:10px;
+  margin-bottom:15px
+}
+.stat {
+  padding:13px 14px;
+  border:1px solid var(--line);
+  border-radius:11px;
+  background:var(--field)
+}
+.stat-value {
+  font-size:23px;
+  font-weight:760;
+  letter-spacing:-.8px;
+  font-variant-numeric:tabular-nums
+}
+.stat-label {
+  margin-top:3px;
+  color:var(--muted);
+  font-size:10px;
+  font-weight:700
+}
+.progress-track {
+  height:6px;
+  overflow:hidden;
+  border-radius:99px;
+  background:var(--line);
+  margin-top:13px
+}
+.progress-fill {
+  height:100%;
+  width:0;
+  background:linear-gradient(90deg,#16a99e,#25e2cc);
+  border-radius:99px;
+  transition:width .2s
+}
+.task-form {
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 120px auto;
+  gap:8px;
+  margin-bottom:15px
+}
+.task-list {
+  display:grid;
+  gap:8px
+}
+.task-item {
+  display:flex;
+  align-items:flex-start;
+  gap:10px;
+  padding:12px;
+  border:1px solid var(--line);
+  border-radius:11px;
+  background:var(--field)
+}
+.task-item.done {
+  opacity:.65
+}
+.task-check {
+  width:17px;
+  height:17px;
+  flex:none;
+  margin-top:2px;
+  accent-color:#10a99c
+}
+.task-content {
+  min-width:0;
+  flex:1
+}
+.task-title {
+  font-size:13px;
+  font-weight:650;
+  line-height:1.4;
+  overflow-wrap:anywhere
+}
+.task-item.done .task-title {
+  text-decoration:line-through;
+  color:var(--muted)
+}
+.task-meta {
+  display:flex;
+  align-items:center;
+  gap:7px;
+  flex-wrap:wrap;
+  margin-top:5px;
+  color:var(--muted);
+  font-size:10px
+}
+.priority {
+  display:inline-flex;
+  align-items:center;
+  border-radius:99px;
+  padding:3px 7px;
+  font-size:9px;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:.4px
+}
+.priority.low {
+  background:rgba(113,131,138,.12);
+  color:var(--muted)
+}
+.priority.medium {
+  background:rgba(224,163,64,.14);
+  color:#b47b20
+}
+.priority.high {
+  background:rgba(198,78,88,.12);
+  color:var(--danger)
+}
+.task-delete {
+  border:0;
+  background:transparent;
+  color:var(--hint);
+  padding:3px 5px;
+  font-size:17px;
+  line-height:1
+}
+.task-delete:hover {
+  color:var(--danger)
+}
+.empty-state {
+  padding:28px 16px;
+  text-align:center;
+  border:1px dashed var(--line);
+  border-radius:11px;
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.6
+}
+.search-row {
+  display:flex;
+  gap:8px;
+  margin-bottom:14px
+}
+.search-row input {
+  min-width:0
+}
+.entry-list {
+  display:grid;
+  gap:9px
+}
+.entry-card {
+  padding:14px;
+  border:1px solid var(--line);
+  border-radius:11px;
+  background:var(--field);
+  cursor:pointer;
+  transition:border-color .15s,transform .15s
+}
+.entry-card:hover {
+  border-color:#20b9aa;
+  transform:translateY(-1px)
+}
+.entry-card-top {
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:12px
+}
+.entry-title {
+  font-size:13px;
+  font-weight:750;
+  overflow-wrap:anywhere
+}
+.entry-meta {
+  margin-top:5px;
+  color:var(--muted);
+  font-size:10px
+}
+.entry-preview {
+  margin-top:8px;
+  color:var(--muted);
+  font-size:11px;
+  line-height:1.5;
+  white-space:pre-wrap;
+  overflow-wrap:anywhere
+}
+.tag {
+  display:inline-flex;
+  padding:3px 7px;
+  border-radius:99px;
+  background:var(--soft-teal);
+  color:var(--teal-strong);
+  font-size:9px;
+  font-weight:750
+}
+.editor-grid {
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 190px;
+  gap:10px
+}
+.editor-grid .full {
+  grid-column:1/-1
+}
+.editor-actions {
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-top:12px
+}
+.editor-card {
+  padding:18px;
+  border:1px solid var(--line);
+  border-radius:13px;
+  background:var(--field)
+}
+.editor-card h3 {
+  margin:0 0 14px;
+  font-size:14px
+}
+.note-toolbar {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  margin-bottom:10px
+}
+.note-toolbar h2 {
+  margin:0;
+  font-size:15px
+}
+.note-list-layout {
+  display:grid;
+  grid-template-columns:260px minmax(0,1fr);
+  gap:14px
+}
+.note-list {
+  display:grid;
+  align-content:start;
+  gap:7px;
+  max-height:620px;
+  overflow:auto
+}
+.note-list-item {
+  width:100%;
+  text-align:left;
+  padding:11px;
+  border:1px solid var(--line);
+  border-radius:10px;
+  background:var(--field);
+  color:var(--ink)
+}
+.note-list-item[aria-current="true"] {
+  border-color:#20b9aa;
+  background:var(--soft-teal)
+}
+.note-list-item strong {
+  display:block;
+  font-size:12px;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap
+}
+.note-list-item span {
+  display:block;
+  margin-top:5px;
+  color:var(--muted);
+  font-size:10px
+}
+.note-editor {
+  min-width:0
+}
+.note-editor textarea {
+  min-height:390px
+}
+.note-editor input {
+  margin-bottom:9px
+}
+.note-editor-footer {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-top:10px
+}
+.scratch-textarea {
+  min-height:310px
+}
+.home-shortcuts {
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:10px
+}
+.shortcut {
+  padding:15px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:var(--field);
+  text-align:left;
+  color:var(--ink)
+}
+.shortcut:hover {
+  border-color:#20b9aa;
+  transform:translateY(-1px)
+}
+.shortcut-icon {
+  display:block;
+  margin-bottom:12px;
+  color:var(--teal-strong)
+}
+.shortcut strong {
+  display:block;
+  font-size:12px
+}
+.shortcut span:last-child {
+  display:block;
+  margin-top:5px;
+  color:var(--muted);
+  font-size:10px;
+  line-height:1.4
+}
+.footer {
+  padding:22px 0 0;
+  text-align:center;
+  color:var(--hint);
+  font-size:10px;
+  line-height:1.7
+}
+.toast {
+  position:fixed;
+  right:24px;
+  bottom:22px;
+  z-index:20;
+  max-width:min(360px,calc(100vw - 32px));
+  padding:11px 15px;
+  border:1px solid var(--line);
+  border-radius:10px;
+  background:var(--surface);
+  color:var(--ink);
+  box-shadow:var(--shadow);
+  font-size:12px;
+  opacity:0;
+  transform:translateY(8px);
+  pointer-events:none;
+  transition:.2s
+}
+.toast.show {
+  opacity:1;
+  transform:translateY(0)
+}
+.hidden {
+  display:none!important
+}
+/* Persistent header clock */
+.topbar-right  {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 16px;
+}
+.header-clock  {
+  display: grid;
+  justify-items: end;
+  gap: 5px;
+  min-width: 270px;
+}
+.top-date  {
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.2;
+}
+.header-timezone  {
+  display: grid;
+  justify-items: end;
+  gap: 3px;
+}
+.header-timezone-main  {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 7px;
+  color: var(--ink);
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+}
+.header-timezone-main .live-dot  {
+  width: 6px;
+  height: 6px;
+}
+.timezone-select  {
+  width: auto;
+  min-width: 0;
+  border: 0;
+  padding: 2px 18px 2px 3px;
+  border-radius: 5px;
+  background-color: transparent;
+  color: var(--teal-strong);
+  font-size: 11px;
+  font-weight: 750;
+  cursor: pointer;
+}
+.timezone-select:focus  {
+  outline: 2px solid rgba(37, 226, 204, .4);
+  outline-offset: 1px;
+}
+.header-timezone-main strong  {
+  font-size: 12px;
+  font-weight: 800;
+}
+.timezone-abbreviation  {
+  color: var(--muted);
+  font-size: 9px;
+  font-weight: 700;
+}
+.header-timezone-conversions  {
+  color: var(--muted);
+  font-size: 9px;
+  line-height: 1.35;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+.visually-hidden  {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+/* Shared editor + reference-sidebar layout */
+.workspace-editor-layout  {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 285px;
+  gap: 15px;
+  align-items: stretch;
+}
+.workspace-editor-layout > *  {
+  min-width: 0;
+}
+.editor-heading-row,
+.reference-sidebar-head  {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+.editor-heading-row  {
+  margin-bottom: 22px;
+}
+.editor-heading-row h2  {
+  margin: 0;
+  font-size: 17px;
+  letter-spacing: -.3px;
+}
+.editor-heading-row .eyebrow,
+.reference-sidebar-head .eyebrow  {
+  margin-bottom: 5px;
+}
+.knowledge-editor,
+.training-editor  {
+  padding: 22px;
+}
+.knowledge-editor > form > input,
+.knowledge-metadata  {
+  margin-bottom: 16px;
+}
+.knowledge-metadata  {
+  grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr);
+  gap: 12px;
+}
+.knowledge-metadata > div  {
+  min-width: 0;
+}
+.knowledge-content  {
+  min-height: 420px;
+}
+.reference-sidebar  {
+  padding: 17px;
+  overflow: hidden;
+}
+.reference-sidebar-head  {
+  margin-bottom: 15px;
+}
+.reference-sidebar-head .panel-subtitle  {
+  margin-top: 4px;
+}
+.reference-sidebar .search-row  {
+  margin-bottom: 12px;
+}
+.reference-sidebar .entry-list,
+.reference-sidebar .note-list  {
+  max-height: 590px;
+  overflow-y: auto;
+  padding-right: 3px;
+}
+.reference-sidebar .entry-card  {
+  padding: 11px;
+}
+.reference-sidebar .entry-preview  {
+  max-height: 3.3em;
+  overflow: hidden;
+}
+.reference-sidebar .note-list  {
+  display: grid;
+  gap: 7px;
+}
+.reference-sidebar .note-list-item  {
+  padding: 12px;
+}
+.reference-new-btn  {
+  width: 100%;
+  margin-top: 12px;
+}
+.training-content  {
+  min-height: 430px;
+}
+.training-editor .field-label  {
+  margin-top: 12px;
+}
+.training-editor .note-editor-footer  {
+  margin-top: 12px;
+}
+.training-editor .button-row  {
+  justify-content: flex-end;
+}
+.editor-empty-state  {
+  min-height: 420px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 30px;
+  border: 1px dashed var(--line);
+  border-radius: 11px;
+  color: var(--muted);
+  text-align: center;
+  line-height: 1.55;
+}
+.editor-empty-state strong  {
+  color: var(--ink);
+  font-size: 16px;
+}
+.editor-empty-state span  {
+  max-width: 340px;
+  font-size: 12px;
+}
+.privacy-reminder  {
+  margin: 12px 2px 0;
+}
+@media (max-width: 1100px)  {
+  .workspace-editor-layout  {
+    grid-template-columns: minmax(0, 1fr) 255px;
+  }
+}
+@media (max-width: 900px)  {
+  .layout  {
+    grid-template-columns: 1fr;
+  }
+  .sidebar  {
+    position: static;
+    padding: 9px;
+  }
+  .side-label,
+  .sidebar-bottom  {
+    display: none;
+  }
+  .nav-list  {
+    display: flex;
+    overflow-x: auto;
+    gap: 5px;
+  }
+  .nav-btn  {
+    width: auto;
+    white-space: nowrap;
+    padding: 10px 12px;
+  }
+  .grid-two  {
+    grid-template-columns: 1fr;
+  }
+  .workspace-editor-layout  {
+    grid-template-columns: minmax(0, 1fr) 245px;
+  }
+}
+@media (max-width: 680px)  {
+  .app  {
+    padding: 14px 12px 24px;
+  }
+  .topbar  {
+    align-items: flex-start;
+    margin-bottom: 15px;
+  }
+  .brand  {
+    min-width: 0;
+  }
+  .brand-sub  {
+    display: none;
+  }
+  .wordmark  {
+    font-size: 19px;
+  }
+  .brand-mark  {
+    width: 33px;
+    height: 33px;
+  }
+  .topbar-right  {
+    gap: 8px;
+    align-items: flex-start;
+  }
+  .header-clock  {
+    min-width: 0;
+    max-width: 205px;
+    gap: 4px;
+  }
+  .top-date  {
+    display: block;
+    font-size: 9px;
+  }
+  .header-timezone-main  {
+    gap: 4px;
+    font-size: 10px;
+  }
+  .timezone-select  {
+    font-size: 10px;
+    padding-right: 14px;
+  }
+  .header-timezone-main strong  {
+    font-size: 10px;
+  }
+  .header-timezone-conversions  {
+    max-width: 205px;
+    font-size: 8px;
+  }
+  .theme-toggle  {
+    padding: 8px 10px;
+  }
+  .theme-toggle .toggle-label  {
+    display: none;
+  }
+  .page-heading  {
+    flex-direction: column;
+  }
+  .page-actions  {
+    width: 100%;
+  }
+  .task-form  {
+    grid-template-columns: 1fr 105px;
+  }
+  .task-form button  {
+    grid-column: 1 / -1;
+  }
+  .task-stats  {
+    gap: 7px;
+  }
+  .stat  {
+    padding: 10px;
+  }
+  .stat-value  {
+    font-size: 20px;
+  }
+  .panel-pad  {
+    padding: 15px;
+  }
+  .workspace-editor-layout  {
+    grid-template-columns: 1fr;
+  }
+  .reference-sidebar  {
+    order: 2;
+  }
+  .reference-sidebar .entry-list,
+  .reference-sidebar .note-list  {
+    max-height: 270px;
+  }
+  .knowledge-editor,
+  .training-editor  {
+    padding: 16px;
+  }
+  .knowledge-metadata  {
+    grid-template-columns: 1fr;
+  }
+  .knowledge-content,
+  .training-content  {
+    min-height: 300px;
+  }
+  .editor-empty-state  {
+    min-height: 280px;
+  }
+  .home-shortcuts  {
+    grid-template-columns: 1fr;
+  }
+  .actions-row  {
+    align-items: stretch;
+  }
+  .button-row  {
+    width: 100%;
+  }
+  .button-row button  {
+    flex: 1;
+  }
+  .editor-grid  {
+    grid-template-columns: 1fr;
+  }
+  .editor-grid .full  {
+    grid-column: auto;
+  }
+}
+@media(prefers-reduced-motion:reduce) {
+  *,*::before,*::after {
+    scroll-behavior:auto!important;
+    transition:none!important
+  }
+}
+  </style>
+ </head>
+ <body>
+  <div class="app">
+   <header class="topbar">
+    <div aria-label="Concentrix personal workspace" class="brand">
+     <svg aria-hidden="true" class="brand-mark" fill="none" viewbox="0 0 64 64">
+      <circle cx="32" cy="32" r="25" stroke="#25e2cc" stroke-width="5">
+      </circle>
+      <circle cx="32" cy="32" r="16" stroke="#0aa99e" stroke-width="5">
+      </circle>
+      <circle cx="32" cy="32" fill="#25e2cc" r="7">
+      </circle>
+     </svg>
+     <div>
+      <div class="wordmark">
+       concentri<span>x</span>
+      </div>
+      <div class="brand-sub">
+       Personal workspace
+      </div>
+     </div>
+    </div>
+    <div class="topbar-right">
+     <div class="header-clock">
+      <span class="top-date" id="topDate">
+      </span>
+      <div aria-label="Live time zone converter" class="header-timezone">
+       <div class="header-timezone-main">
+        <span aria-hidden="true" class="live-dot">
+        </span>
+        <label class="visually-hidden" for="timezoneSelect">
+         Primary time zone
+        </label>
+        <select aria-label="Choose primary time zone" class="timezone-select" id="timezoneSelect">
+         <option value="mountain">
+          Mountain
+         </option>
+         <option value="central">
+          Central
+         </option>
+         <option value="eastern">
+          Eastern
+         </option>
+        </select>
+        <strong id="primaryZoneTime">
+         --:--:--
+        </strong>
+        <span class="timezone-abbreviation" id="primaryZoneAbbreviation">
+         ET
+        </span>
+       </div>
+       <div aria-live="off" class="header-timezone-conversions" id="timezoneConversions">
+       </div>
+      </div>
+     </div>
+     <button aria-label="Switch to light mode" class="theme-toggle" id="themeToggle" type="button">
+      <svg aria-hidden="true" fill="none" height="15" id="themeIcon" viewbox="0 0 24 24" width="15">
+       <path d="M12 3v2m0 14v2M3 12h2m14 0h2M5.64 5.64l1.42 1.42m9.88 9.88 1.42 1.42m0-12.72-1.42 1.42m-9.88 9.88-1.42 1.42M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8Z" stroke="currentColor" stroke-linecap="round" stroke-width="1.7">
+       </path>
+      </svg>
+      <span class="toggle-label" id="themeLabel">
+       Light mode
+      </span>
+     </button>
+    </div>
+   </header>
+   <div class="layout">
+    <aside aria-label="Main navigation" class="sidebar">
+     <div class="side-label">
+      Workspace
+     </div>
+     <nav class="nav-list">
+      <button aria-current="page" class="nav-btn" data-page="home">
+       <svg fill="none" viewbox="0 0 24 24">
+        <path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-6v-7h-4v7H4a1 1 0 0 1-1-1V10Z" stroke="currentColor" stroke-linejoin="round" stroke-width="1.7">
+        </path>
+       </svg>
+       Overview
+      </button>
+      <button class="nav-btn" data-page="tasks">
+       <svg fill="none" viewbox="0 0 24 24">
+        <path d="M9 5h11M9 12h11M9 19h11M4 5h.01M4 12h.01M4 19h.01" stroke="currentColor" stroke-linecap="round" stroke-width="2">
+        </path>
+       </svg>
+       Daily tasks
+      </button>
+      <button class="nav-btn" data-page="knowledge">
+       <svg fill="none" viewbox="0 0 24 24">
+        <path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v17H6.5A2.5 2.5 0 0 0 4 22V5.5ZM4 5.5V19a2 2 0 0 1 2-2h14" stroke="currentColor" stroke-linejoin="round" stroke-width="1.7">
+        </path>
+       </svg>
+       Knowledge base
+      </button>
+      <button class="nav-btn" data-page="training">
+       <svg fill="none" viewbox="0 0 24 24">
+        <path d="M5 3h11l4 4v14H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z" stroke="currentColor" stroke-width="1.7">
+        </path>
+        <path d="M15 3v5h5M7 12h10M7 16h10" stroke="currentColor" stroke-linecap="round" stroke-width="1.7">
+        </path>
+       </svg>
+       Training notes
+      </button>
+      <button class="nav-btn" data-page="scratchpad">
+       <svg fill="none" viewbox="0 0 24 24">
+        <path d="m15 4 5 5M4 20l4.5-1 11-11a2.12 2.12 0 0 0-3-3l-11 11L4 20Z" stroke="currentColor" stroke-linejoin="round" stroke-width="1.7">
+        </path>
+       </svg>
+       Scratchpad
+      </button>
+     </nav>
+     <div class="sidebar-bottom">
+      Personal productivity tool
+      <br/>
+      Not an official Concentrix application.
+     </div>
+    </aside>
+    <main class="main">
+     <section class="section active" id="page-home">
+      <div class="page-heading">
+       <div>
+        <p class="eyebrow">
+         Your workspace
+        </p>
+        <h1>
+         Good to have you here.
+        </h1>
+        <p class="page-description">
+         A focused place for your daily tasks, reference notes, and training materials.
+        </p>
+       </div>
+      </div>
+      <div class="grid-two">
+       <div class="panel panel-pad">
+        <div class="panel-head">
+         <div>
+          <h2 class="panel-title">
+           Today's progress
+          </h2>
+          <p class="panel-subtitle">
+           Keep your priorities visible and manageable.
+          </p>
+         </div>
+         <button class="small-btn" data-goto="tasks">
+          View tasks
+         </button>
+        </div>
+        <div class="task-stats">
+         <div class="stat">
+          <div class="stat-value" id="homeTaskTotal">
+           0
+          </div>
+          <div class="stat-label">
+           Total tasks
+          </div>
+         </div>
+         <div class="stat">
+          <div class="stat-value" id="homeTaskDone">
+           0
+          </div>
+          <div class="stat-label">
+           Completed
+          </div>
+         </div>
+         <div class="stat">
+          <div class="stat-value" id="homeTaskLeft">
+           0
+          </div>
+          <div class="stat-label">
+           Remaining
+          </div>
+         </div>
+        </div>
+        <div class="progress-track">
+         <div class="progress-fill" id="homeProgress">
+         </div>
+        </div>
+        <p class="panel-subtitle" id="homeProgressText">
+         Add a task to get started.
+        </p>
+       </div>
+       <div class="panel panel-pad">
+        <div class="panel-head">
+         <div>
+          <h2 class="panel-title">
+           Quick navigation
+          </h2>
+          <p class="panel-subtitle">
+           Jump straight to the tools you need.
+          </p>
+         </div>
+        </div>
+        <div class="home-shortcuts">
+         <button class="shortcut" data-goto="tasks">
+          <span class="shortcut-icon">
+           ☑
+          </span>
+          <strong>
+           Daily tasks
+          </strong>
+          <span>
+           Plan and track your day
+          </span>
+         </button>
+         <button class="shortcut" data-goto="knowledge">
+          <span class="shortcut-icon">
+           ▤
+          </span>
+          <strong>
+           Knowledge base
+          </strong>
+          <span>
+           Keep reusable references
+          </span>
+         </button>
+         <button class="shortcut" data-goto="training">
+          <span class="shortcut-icon">
+           ✎
+          </span>
+          <strong>
+           Training notes
+          </strong>
+          <span>
+           Capture class notes
+          </span>
+         </button>
+        </div>
+       </div>
+      </div>
+     </section>
+     <section class="section" id="page-tasks">
+      <div class="page-heading">
+       <div>
+        <p class="eyebrow">
+         Stay organized
+        </p>
+        <h1>
+         Daily tasks
+        </h1>
+        <p class="page-description">
+         A simple checklist for what you need to get done today.
+        </p>
+       </div>
+       <div class="page-actions">
+        <button class="secondary-btn" id="clearCompletedTasks">
+         Clear completed
+        </button>
+       </div>
+      </div>
+      <div class="panel panel-pad">
+       <div class="task-stats">
+        <div class="stat">
+         <div class="stat-value" id="taskTotal">
+          0
+         </div>
+         <div class="stat-label">
+          Total tasks
+         </div>
+        </div>
+        <div class="stat">
+         <div class="stat-value" id="taskDone">
+          0
+         </div>
+         <div class="stat-label">
+          Completed
+         </div>
+        </div>
+        <div class="stat">
+         <div class="stat-value" id="taskLeft">
+          0
+         </div>
+         <div class="stat-label">
+          Remaining
+         </div>
+        </div>
+       </div>
+       <div class="progress-track">
+        <div class="progress-fill" id="taskProgress">
+        </div>
+       </div>
+       <p class="panel-subtitle" id="taskProgressText" style="margin:8px 0 17px">
+        Your progress will appear here.
+       </p>
+       <form class="task-form" id="taskForm">
+        <input aria-label="New task" id="taskInput" maxlength="180" placeholder="Add a task&hellip;" required="" type="text"/>
+        <select aria-label="Task priority" id="taskPriority">
+         <option value="medium">
+          Medium priority
+         </option>
+         <option value="high">
+          High priority
+         </option>
+         <option value="low">
+          Low priority
+         </option>
+        </select>
+        <button class="primary-btn" type="submit">
+         ＋ Add task
+        </button>
+       </form>
+       <div class="task-list" id="taskList">
+       </div>
+       <p class="panel-subtitle" style="margin:13px 0 0">
+        Tasks are stored on this device. Completed tasks remain until you clear them.
+       </p>
+      </div>
+     </section>
+     <section class="section" id="page-knowledge">
+      <div class="page-heading">
+       <div>
+        <p class="eyebrow">
+         Your reference library
+        </p>
+        <h1>
+         Knowledge base
+        </h1>
+        <p class="page-description">
+         Write and maintain reusable information, procedures, reminders, and helpful references.
+        </p>
+       </div>
+       <div class="page-actions">
+        <button class="primary-btn" id="newKnowledgeBtn" type="button">
+         ＋ New reference
+        </button>
+       </div>
+      </div>
+      <div class="workspace-editor-layout">
+       <section aria-label="Knowledge base editor" class="editor-card knowledge-editor">
+        <div class="editor-heading-row">
+         <div>
+          <p class="eyebrow">
+           Editor
+          </p>
+          <h2 id="knowledgeEditorHeading">
+           Create a reference
+          </h2>
+          <p class="panel-subtitle">
+           Add a title, choose a category, then write your reference.
+          </p>
+         </div>
+         <span class="tag" id="knowledgeEditorState">
+          New reference
+         </span>
+        </div>
+        <form id="knowledgeForm">
+         <label class="field-label" for="knowledgeTitle">
+          Title
+         </label>
+         <input id="knowledgeTitle" maxlength="120" placeholder="e.g. Password reset process" required="" type="text"/>
+         <div class="editor-grid knowledge-metadata">
+          <div>
+           <label class="field-label" for="knowledgeCategory">
+            Category
+           </label>
+           <select aria-label="Category" id="knowledgeCategory">
+            <option>
+             General
+            </option>
+            <option>
+             Process
+            </option>
+            <option>
+             Troubleshooting
+            </option>
+            <option>
+             Systems &amp; tools
+            </option>
+            <option>
+             Reminders
+            </option>
+            <option>
+             Learning
+            </option>
+           </select>
+          </div>
+          <div>
+           <label class="field-label" for="knowledgeTags">
+            Tags
+           </label>
+           <input id="knowledgeTags" maxlength="100" placeholder="Comma-separated tags" type="text"/>
+          </div>
+         </div>
+         <label class="field-label" for="knowledgeContent">
+          Reference content
+         </label>
+         <textarea aria-label="Knowledge entry content" class="knowledge-content" id="knowledgeContent" placeholder="Write the steps, details, reminders, or information you want to keep&hellip;"></textarea>
+         <div class="editor-actions">
+          <button class="primary-btn" id="saveKnowledgeBtn" type="submit">
+           Save reference
+          </button>
+          <button class="secondary-btn" id="newKnowledgeCancel" type="button">
+           Clear editor
+          </button>
+          <button class="danger-btn hidden" id="deleteKnowledgeBtn" type="button">
+           Delete reference
+          </button>
+         </div>
+         <p class="panel-subtitle privacy-reminder">
+          Keep entries general and non-confidential. Do not store customer-identifying or restricted company information here.
+         </p>
+        </form>
+       </section>
+       <aside aria-label="Saved knowledge references" class="reference-sidebar panel">
+        <div class="reference-sidebar-head">
+         <div>
+          <p class="eyebrow">
+           Library
+          </p>
+          <h2 class="panel-title">
+           Saved references
+          </h2>
+          <p class="panel-subtitle">
+           Select an entry to edit it.
+          </p>
+         </div>
+         <span class="tag" id="knowledgeCount">
+          0
+         </span>
+        </div>
+        <div class="search-row">
+         <input aria-label="Search knowledge base" id="knowledgeSearch" placeholder="Search references&hellip;" type="search"/>
+        </div>
+        <div class="entry-list" id="knowledgeList">
+        </div>
+       </aside>
+      </div>
+     </section>
+     <section class="section" id="page-training">
+      <div class="page-heading">
+       <div>
+        <p class="eyebrow">
+         Learning journal
+        </p>
+        <h1>
+         Training notes
+        </h1>
+        <p class="page-description">
+         Keep lessons, explanations, questions, and things to revisit in one organized notebook.
+        </p>
+       </div>
+       <div class="page-actions">
+        <button class="primary-btn" id="newTrainingBtn" type="button">
+         ＋ New note
+        </button>
+       </div>
+      </div>
+      <div class="workspace-editor-layout">
+       <section aria-label="Training note editor" class="editor-card training-editor">
+        <div class="editor-heading-row">
+         <div>
+          <p class="eyebrow">
+           Note editor
+          </p>
+          <h2 id="trainingEditorHeading">
+           Your training note
+          </h2>
+          <p class="panel-subtitle">
+           Choose a note on the right, or create a new one.
+          </p>
+         </div>
+         <span aria-live="polite" class="tag" id="trainingSaveStatus">
+          No note selected
+         </span>
+        </div>
+        <div class="editor-empty-state" id="trainingEmptyState">
+         <strong>
+          Ready to take notes?
+         </strong>
+         <span>
+          Select an existing note from your notebook, or click
+          <b>
+           New note
+          </b>
+          to start a blank one.
+         </span>
+         <button class="primary-btn" id="trainingEmptyNewBtn" type="button">
+          ＋ Create your first note
+         </button>
+        </div>
+        <div class="hidden" id="trainingEditorFields">
+         <label class="field-label" for="trainingTitle">
+          Note title
+         </label>
+         <input id="trainingTitle" maxlength="120" placeholder="e.g. Day 1 &mdash; Account tools" type="text"/>
+         <label class="field-label" for="trainingContent">
+          Your notes
+         </label>
+         <textarea aria-label="Training note content" class="training-content" id="trainingContent" placeholder="Start with a topic, then capture the important details.
+
+Suggested structure:
+&bull; Topic:
+&bull; Key points:
+&bull; Steps / process:
+&bull; Questions to ask:
+&bull; Things to review:"></textarea>
+         <div class="note-editor-footer">
+          <span class="panel-subtitle" id="trainingSaveHint">
+           Changes save automatically.
+          </span>
+          <div class="button-row">
+           <button class="secondary-btn" id="copyTrainingBtn" type="button">
+            Copy note
+           </button>
+           <button class="danger-btn" id="deleteTrainingBtn" type="button">
+            Delete note
+           </button>
+          </div>
+         </div>
+        </div>
+       </section>
+       <aside aria-label="Training notebook" class="reference-sidebar panel">
+        <div class="reference-sidebar-head">
+         <div>
+          <p class="eyebrow">
+           Notebook
+          </p>
+          <h2 class="panel-title">
+           Your notes
+          </h2>
+          <p class="panel-subtitle">
+           Select a note to open it.
+          </p>
+         </div>
+         <span class="tag" id="trainingCount">
+          0
+         </span>
+        </div>
+        <div class="search-row">
+         <input aria-label="Search training notes" id="trainingSearch" placeholder="Search training notes&hellip;" type="search"/>
+        </div>
+        <div class="note-list" id="trainingList">
+        </div>
+        <button class="secondary-btn reference-new-btn" id="trainingSidebarNewBtn" type="button">
+         ＋ New note
+        </button>
+       </aside>
+      </div>
+      <p class="panel-subtitle privacy-reminder">
+       Notes are saved locally in this browser. Avoid entering customer personal data, passwords, payment details, or confidential company information.
+      </p>
+     </section>
+     <section class="section" id="page-scratchpad">
+      <div class="page-heading">
+       <div>
+        <p class="eyebrow">
+         Quick capture
+        </p>
+        <h1>
+         Scratchpad
+        </h1>
+        <p class="page-description">
+         Temporary notes and text you want close at hand.
+        </p>
+       </div>
+      </div>
+      <div class="panel panel-pad">
+       <label class="field-label" for="scratchpad">
+        <span>
+         Scratchpad notes
+        </span>
+        <span class="field-hint">
+         Automatically saved on this device
+        </span>
+       </label>
+       <textarea class="scratch-textarea" id="scratchpad" placeholder="Start typing here&hellip;" spellcheck="true"></textarea>
+       <div class="actions-row">
+        <span class="panel-subtitle">
+         Your notes are saved automatically.
+        </span>
+        <div class="button-row">
+         <button class="secondary-btn" id="clearButton" type="button">
+          Clear notes
+         </button>
+         <button class="secondary-btn" id="clearClipboardBtn" type="button">
+          Clear clipboard
+         </button>
+         <button class="primary-btn" id="copyButton" type="button">
+          Copy text
+         </button>
+        </div>
+       </div>
+       <p aria-live="polite" class="status" id="status" role="status">
+       </p>
+      </div>
+     </section>
+     <footer class="footer">
+      Personal productivity tool. Not an official Concentrix application.
+      <br/>
+      Made by Richard Back &middot; AI-assisted and manually reviewed.
+     </footer>
+    </main>
+   </div>
+  </div>
+  <div aria-live="polite" class="toast" id="toast" role="status">
+  </div>
+  <script>
+   (() => {
+"use strict";
+const $ = id => document.getElementById(id);
+const STORAGE_KEY = "concentrixScratchpadNote"; // Preserved from your original version.
+const THEME_KEY = "concentrixScratchpadTheme";  // Preserved from your original version.
+const TASKS_KEY = "concentrixDailyTasks_v1";
+const KNOWLEDGE_KEY = "concentrixKnowledgeBase_v1";
+const TRAINING_KEY = "concentrixTrainingNotes_v1";
+const safeRead = (key, fallback) => {
+  try { const value = localStorage.getItem(key); return value === null ? fallback : JSON.parse(value); }
+  catch { return fallback; }
+};
+const safeWrite = (key, value) => {
+  try { localStorage.setItem(key, JSON.stringify(value)); return true; }
+  catch { toast("Could not save. Browser storage may be unavailable or full."); return false; }
+};
+let toastTimer;
+function toast(message) {
+  const el = $("toast"); el.textContent = message; el.classList.add("show");
+  clearTimeout(toastTimer); toastTimer = setTimeout(() => el.classList.remove("show"), 2300);
+}
+function makeId(){return (window.crypto && crypto.randomUUID) ? crypto.randomUUID() : `${Date.now()}-${Math.random().toString(16).slice(2)}`;}
+function escapeHTML(value){return String(value ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+
+// Theme: retain the original saved preference and dark-by-default behavior.
+function setTheme(theme){
+  document.documentElement.dataset.theme = theme;
+  const dark = theme === "dark";
+  $("themeLabel").textContent = dark ? "Light mode" : "Dark mode";
+  $("themeToggle").setAttribute("aria-label", dark ? "Switch to light mode" : "Switch to dark mode");
+  $("themeIcon").innerHTML = dark
+    ? '<path d="M12 3v2m0 14v2M3 12h2m14 0h2M5.64 5.64l1.42 1.42m9.88 9.88 1.42 1.42m0-12.72-1.42 1.42m-9.88 9.88-1.42 1.42M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8Z" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>'
+    : '<path d="M20.2 15.1A8.5 8.5 0 0 1 8.9 3.8 8.6 8.6 0 1 0 20.2 15.1Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>';
+  try{localStorage.setItem(THEME_KEY,theme);}catch{}
+}
+let savedTheme = "dark";
+try { savedTheme = localStorage.getItem(THEME_KEY) || "dark"; } catch {}
+setTheme(savedTheme);
+$("themeToggle").addEventListener("click",()=>setTheme(document.documentElement.dataset.theme === "dark" ? "light" : "dark"));
+
+// Navigation.
+function navigate(page){
+  document.querySelectorAll(".section").forEach(s=>s.classList.toggle("active",s.id===`page-${page}`));
+  document.querySelectorAll(".nav-btn").forEach(b=>{
+    if(b.dataset.page===page)b.setAttribute("aria-current","page");else b.removeAttribute("aria-current");
+  });
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+document.querySelectorAll(".nav-btn").forEach(b=>b.addEventListener("click",()=>navigate(b.dataset.page)));
+document.querySelectorAll("[data-goto]").forEach(b=>b.addEventListener("click",()=>navigate(b.dataset.goto)));
+$("topDate").textContent = new Intl.DateTimeFormat("en-US",{weekday:"short",month:"short",day:"numeric",year:"numeric"}).format(new Date());
+
+// Persistent time-zone converter.
+const TIME_ZONE_KEY = "concentrixSelectedTimeZone_v1";
+const timeZones = {
+  mountain: { label: "Mountain", timeZone: "America/Denver" },
+  central:  { label: "Central",  timeZone: "America/Chicago" },
+  eastern:  { label: "Eastern",  timeZone: "America/New_York" }
+};
+
+const validTimeZone = value => Object.hasOwn(timeZones, value);
+let selectedTimeZone = "eastern";
+
+try {
+  const savedTimeZone = localStorage.getItem(TIME_ZONE_KEY);
+  if (validTimeZone(savedTimeZone)) selectedTimeZone = savedTimeZone;
+} catch {}
+
+function getZoneTime(date, timeZone, includeSeconds = false) {
+  return new Intl.DateTimeFormat("en-US", {
+    timeZone,
+    hour: "numeric",
+    minute: "2-digit",
+    ...(includeSeconds ? { second: "2-digit" } : {}),
+    hour12: true
+  }).format(date);
+}
+
+function getZoneAbbreviation(date, timeZone) {
+  return new Intl.DateTimeFormat("en-US", {
+    timeZone,
+    timeZoneName: "short"
+  }).formatToParts(date).find(part => part.type === "timeZoneName")?.value || "";
+}
+
+function renderTimeZones() {
+  const now = new Date();
+  const selected = timeZones[selectedTimeZone];
+
+  $("timezoneSelect").value = selectedTimeZone;
+  $("topDate").textContent = new Intl.DateTimeFormat("en-US", {
+    weekday: "short",
+    month: "short",
+    day: "numeric",
+    year: "numeric"
+  }).format(now);
+
+  $("primaryZoneTime").textContent = getZoneTime(now, selected.timeZone, true);
+  $("primaryZoneAbbreviation").textContent = getZoneAbbreviation(now, selected.timeZone);
+
+  $("timezoneConversions").textContent = Object.entries(timeZones)
+    .filter(([key]) => key !== selectedTimeZone)
+    .map(([, zone]) => {
+      const abbreviation = getZoneAbbreviation(now, zone.timeZone);
+      const time = getZoneTime(now, zone.timeZone);
+      const shortLabel = zone.label === "Mountain" ? "" : zone.label === "Central" ? "" : "";
+      return `${shortLabel} ${time} ${abbreviation}`;
+    })
+    .join("  ·  ");
+}
+
+$("timezoneSelect").addEventListener("change", event => {
+  const nextTimeZone = event.target.value;
+  if (!validTimeZone(nextTimeZone)) return;
+
+  selectedTimeZone = nextTimeZone;
+  try {
+    localStorage.setItem(TIME_ZONE_KEY, selectedTimeZone);
+  } catch {
+    toast("Time zone selection could not be saved in this browser.");
+  }
+  renderTimeZones();
+});
+
+renderTimeZones();
+setInterval(renderTimeZones, 1000);
+
+// Scratchpad: preserve original storage key, auto-save, copy, clear, and clipboard control.
+const scratch=$("scratchpad"), status=$("status");
+try{scratch.value=localStorage.getItem(STORAGE_KEY)||"";}catch{status.textContent="Automatic saving is unavailable in this browser session.";}
+scratch.addEventListener("input",()=>{try{localStorage.setItem(STORAGE_KEY,scratch.value);status.textContent="Saved on this device.";}catch{status.textContent="Could not save automatically. Check browser storage settings."; }});
+$("copyButton").addEventListener("click",async()=>{
+  if(!scratch.value){status.textContent="There is no text to copy yet.";scratch.focus();return;}
+  try{await navigator.clipboard.writeText(scratch.value);status.textContent="Copied to clipboard.";}
+  catch{scratch.focus();scratch.select();const ok=document.execCommand("copy");scratch.setSelectionRange(scratch.value.length,scratch.value.length);status.textContent=ok?"Copied to clipboard.":"Copy was blocked. Select the text and copy manually.";}
+});
+$("clearClipboardBtn").addEventListener("click",async()=>{
+  try{await navigator.clipboard.writeText("\u200b");toast("Clipboard cleared.");}
+  catch{toast("Clipboard access was blocked by the browser.");}
+});
+$("clearButton").addEventListener("click",()=>{
+  if(!scratch.value){status.textContent="The scratchpad is already empty.";return;}
+  if(!confirm("Clear all text from your scratchpad? This cannot be undone."))return;
+  scratch.value="";try{localStorage.removeItem(STORAGE_KEY);status.textContent="Scratchpad cleared.";}catch{status.textContent="Text cleared, but saved browser data could not be updated.";}scratch.focus();
+});
+
+// Daily tasks.
+let tasks=safeRead(TASKS_KEY,[]);
+if(!Array.isArray(tasks))tasks=[];
+function saveTasks(){safeWrite(TASKS_KEY,tasks);renderTasks();}
+function renderTasks(){
+  const total=tasks.length,done=tasks.filter(t=>t.done).length,left=total-done,pct=total?Math.round(done/total*100):0;
+  [["taskTotal",total],["taskDone",done],["taskLeft",left],["homeTaskTotal",total],["homeTaskDone",done],["homeTaskLeft",left]].forEach(([id,v])=>$(id).textContent=v);
+  $("taskProgress").style.width=`${pct}%`;$("homeProgress").style.width=`${pct}%`;
+  $("taskProgressText").textContent=total?`${pct}% complete · ${left} task${left===1?"":"s"} remaining`:"Add a task to get started.";
+  $("homeProgressText").textContent=total?`${pct}% complete today.`:"Add a task to get started.";
+  const list=$("taskList");
+  if(!total){list.innerHTML='<div class="empty-state">No tasks yet.<br>Add your first task above to organize your day.</div>';return;}
+  list.innerHTML=tasks.map(t=>`<div class="task-item ${t.done?"done":""}" data-id="${escapeHTML(t.id)}">
+    <input class="task-check" type="checkbox" aria-label="Mark task complete" ${t.done?"checked":""}>
+    <div class="task-content"><div class="task-title">${escapeHTML(t.title)}</div><div class="task-meta"><span class="priority ${escapeHTML(t.priority)}">${escapeHTML(t.priority)} priority</span><span>${new Date(t.createdAt).toLocaleDateString()}</span></div></div>
+    <button class="task-delete" type="button" aria-label="Delete task" title="Delete task">×</button>
+  </div>`).join("");
+  list.querySelectorAll(".task-item").forEach(item=>{
+    const task=tasks.find(t=>t.id===item.dataset.id);
+    item.querySelector(".task-check").addEventListener("change",e=>{task.done=e.target.checked;saveTasks();});
+    item.querySelector(".task-delete").addEventListener("click",()=>{tasks=tasks.filter(t=>t.id!==task.id);saveTasks();toast("Task deleted.");});
+  });
+}
+$("taskForm").addEventListener("submit",e=>{
+  e.preventDefault();const title=$("taskInput").value.trim();if(!title)return;
+  tasks.unshift({id:makeId(),title,priority:$("taskPriority").value,done:false,createdAt:new Date().toISOString()});
+  $("taskInput").value="";saveTasks();$("taskInput").focus();
+});
+$("clearCompletedTasks").addEventListener("click",()=>{
+  const before=tasks.length;tasks=tasks.filter(t=>!t.done);saveTasks();toast(before===tasks.length?"There are no completed tasks.":"Completed tasks cleared.");
+});
+renderTasks();
+
+// Knowledge base.
+let knowledge=safeRead(KNOWLEDGE_KEY,[]);if(!Array.isArray(knowledge))knowledge=[];
+let editingKnowledgeId=null;
+function resetKnowledgeForm(){
+  editingKnowledgeId = null;
+  $("knowledgeForm").reset();
+  $("knowledgeEditorHeading").textContent = "Create a reference";
+  $("knowledgeEditorState").textContent = "New reference";
+  $("saveKnowledgeBtn").textContent = "Save reference";
+  $("deleteKnowledgeBtn").classList.add("hidden");
+}
+function renderKnowledge(){
+  const query=$("knowledgeSearch").value.trim().toLowerCase();
+  const filtered=knowledge.filter(e=>[e.title,e.category,e.tags,e.content].join(" ").toLowerCase().includes(query));
+  $("knowledgeCount").textContent=`${knowledge.length} ${knowledge.length===1?"entry":"entries"}`;
+  const list=$("knowledgeList");
+  if(!filtered.length){list.innerHTML=`<div class="empty-state">${knowledge.length?"No entries match your search.":"Your knowledge base is empty.<br>Create a reference to get started."}</div>`;return;}
+  list.innerHTML=filtered.map(e=>`<article class="entry-card" data-id="${escapeHTML(e.id)}" tabindex="0" role="button" aria-label="Open ${escapeHTML(e.title)}">
+    <div class="entry-card-top"><div class="entry-title">${escapeHTML(e.title)}</div><span class="tag">${escapeHTML(e.category||"General")}</span></div>
+    <div class="entry-meta">${new Date(e.updatedAt||e.createdAt).toLocaleDateString()}${e.tags?.length?" · "+escapeHTML(e.tags.join(", ")):""}</div>
+    <div class="entry-preview">${escapeHTML((e.content||"").slice(0,145))}${(e.content||"").length>145?"…":""}</div>
+  </article>`).join("");
+  list.querySelectorAll(".entry-card").forEach(card=>{
+    const open=()=>loadKnowledge(card.dataset.id);
+    card.addEventListener("click",open);card.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();open();}});
+  });
+}
+function loadKnowledge(id){
+  const e=knowledge.find(x=>x.id===id);if(!e)return;
+  editingKnowledgeId=id;$("knowledgeTitle").value=e.title;$("knowledgeCategory").value=e.category||"General";
+  $("knowledgeTags").value=(e.tags||[]).join(", ");$("knowledgeContent").value=e.content||"";
+  $("knowledgeEditorHeading").textContent = "Edit reference";
+  $("knowledgeEditorState").textContent = "Editing";
+  $("saveKnowledgeBtn").textContent = "Save changes";
+  $("deleteKnowledgeBtn").classList.remove("hidden");
+}
+$("knowledgeForm").addEventListener("submit",e=>{
+  e.preventDefault();const title=$("knowledgeTitle").value.trim();if(!title)return;
+  const now=new Date().toISOString(),record={id:editingKnowledgeId||makeId(),title,category:$("knowledgeCategory").value,tags:$("knowledgeTags").value.split(",").map(x=>x.trim()).filter(Boolean),content:$("knowledgeContent").value,updatedAt:now};
+  if(editingKnowledgeId){const i=knowledge.findIndex(x=>x.id===editingKnowledgeId);if(i>=0)knowledge[i]={...knowledge[i],...record};}
+  else knowledge.unshift({...record,createdAt:now});
+  if (safeWrite(KNOWLEDGE_KEY, knowledge)) {
+    resetKnowledgeForm();
+    renderKnowledge();
+    toast("Knowledge reference saved.");
+  }
+});
+$("newKnowledgeBtn").addEventListener("click",()=>{resetKnowledgeForm();$("knowledgeTitle").focus();});
+$("newKnowledgeCancel").addEventListener("click",resetKnowledgeForm);
+$("deleteKnowledgeBtn").addEventListener("click",()=>{
+  if(!editingKnowledgeId)return;if(!confirm("Delete this knowledge base entry?"))return;
+  knowledge=knowledge.filter(e=>e.id!==editingKnowledgeId);safeWrite(KNOWLEDGE_KEY,knowledge);resetKnowledgeForm();renderKnowledge();toast("Entry deleted.");
+});
+$("knowledgeSearch").addEventListener("input",renderKnowledge);
+renderKnowledge();
+
+// Training notes: each note is stored separately and autosaves while editing.
+let training = safeRead(TRAINING_KEY, []);
+if (!Array.isArray(training)) training = [];
+
+let activeTrainingId = null;
+let trainingSaveTimer = null;
+
+function renderTrainingList() {
+  const searchTerm = $("trainingSearch").value.trim().toLowerCase();
+  const filteredNotes = training.filter(note =>
+    `${note.title || ""} ${note.content || ""}`.toLowerCase().includes(searchTerm)
+  );
+
+  $("trainingCount").textContent = `${training.length}`;
+  const list = $("trainingList");
+
+  if (!filteredNotes.length) {
+    const message = training.length
+      ? "No notes match your search."
+      : "No notes yet. Click New note to create your first one.";
+
+    list.innerHTML = `<div class="empty-state">${message}</div>`;
+    return;
+  }
+
+  list.innerHTML = filteredNotes.map(note => `
+    <button
+      class="note-list-item"
+      type="button"
+      data-id="${escapeHTML(note.id)}"
+      aria-current="${note.id === activeTrainingId ? "true" : "false"}"
+    >
+      <strong>${escapeHTML(note.title || "Untitled training note")}</strong>
+      <span>${new Date(note.updatedAt || note.createdAt).toLocaleDateString()}</span>
+    </button>
+  `).join("");
+
+  list.querySelectorAll(".note-list-item").forEach(button => {
+    button.addEventListener("click", () => selectTraining(button.dataset.id));
+  });
+}
+
+function showTrainingEmptyState() {
+  activeTrainingId = null;
+  $("trainingEmptyState").classList.remove("hidden");
+  $("trainingEditorFields").classList.add("hidden");
+  $("trainingEditorHeading").textContent = "Your training note";
+  $("trainingSaveStatus").textContent = "No note selected";
+  renderTrainingList();
+}
+
+function selectTraining(id) {
+  // Flush pending edits before switching to another note.
+  if (trainingSaveTimer) {
+    clearTimeout(trainingSaveTimer);
+    trainingSaveTimer = null;
+    saveActiveTraining();
+  }
+
+  const note = training.find(item => item.id === id);
+  if (!note) return;
+
+  activeTrainingId = id;
+  $("trainingEmptyState").classList.add("hidden");
+  $("trainingEditorFields").classList.remove("hidden");
+  $("trainingEditorHeading").textContent = note.title || "Untitled training note";
+  $("trainingTitle").value = note.title || "";
+  $("trainingContent").value = note.content || "";
+  $("trainingSaveStatus").textContent = "Saved";
+  $("trainingSaveHint").textContent = "Changes save automatically on this device.";
+  renderTrainingList();
+}
+
+function saveActiveTraining() {
+  if (!activeTrainingId) return;
+
+  const note = training.find(item => item.id === activeTrainingId);
+  if (!note) return;
+
+  note.title = $("trainingTitle").value.trim() || "Untitled training note";
+  note.content = $("trainingContent").value;
+  note.updatedAt = new Date().toISOString();
+
+  if (safeWrite(TRAINING_KEY, training)) {
+    $("trainingEditorHeading").textContent = note.title;
+    $("trainingSaveStatus").textContent = "Saved";
+    $("trainingSaveHint").textContent = `Saved at ${new Date().toLocaleTimeString([], {
+      hour: "numeric",
+      minute: "2-digit"
+    })}.`;
+  }
+
+  renderTrainingList();
+}
+
+function scheduleTrainingSave() {
+  if (!activeTrainingId) return;
+
+  $("trainingSaveStatus").textContent = "Editing…";
+  $("trainingSaveHint").textContent = "Saving your changes…";
+  clearTimeout(trainingSaveTimer);
+
+  trainingSaveTimer = setTimeout(() => {
+    trainingSaveTimer = null;
+    saveActiveTraining();
+  }, 350);
+}
+
+function createTrainingNote() {
+  if (trainingSaveTimer) {
+    clearTimeout(trainingSaveTimer);
+    trainingSaveTimer = null;
+    saveActiveTraining();
+  }
+
+  const now = new Date();
+  const note = {
+    id: makeId(),
+    title: "Untitled training note",
+    content: "",
+    createdAt: now.toISOString(),
+    updatedAt: now.toISOString()
+  };
+
+  training.unshift(note);
+
+  if (safeWrite(TRAINING_KEY, training)) {
+    selectTraining(note.id);
+    $("trainingTitle").focus();
+    $("trainingTitle").select();
+    toast("Blank training note created.");
+  }
+}
+
+$("newTrainingBtn").addEventListener("click", createTrainingNote);
+$("trainingEmptyNewBtn").addEventListener("click", createTrainingNote);
+$("trainingSidebarNewBtn").addEventListener("click", createTrainingNote);
+
+$("trainingTitle").addEventListener("input", scheduleTrainingSave);
+$("trainingContent").addEventListener("input", scheduleTrainingSave);
+$("trainingSearch").addEventListener("input", renderTrainingList);
+
+$("deleteTrainingBtn").addEventListener("click", () => {
+  if (!activeTrainingId) return;
+  if (!confirm("Delete this training note?")) return;
+
+  clearTimeout(trainingSaveTimer);
+  trainingSaveTimer = null;
+  training = training.filter(note => note.id !== activeTrainingId);
+  safeWrite(TRAINING_KEY, training);
+  showTrainingEmptyState();
+  toast("Training note deleted.");
+});
+
+$("copyTrainingBtn").addEventListener("click", async () => {
+  if (!activeTrainingId) return;
+
+  const text = `${$("trainingTitle").value}\n\n${$("trainingContent").value}`;
+
+  try {
+    await navigator.clipboard.writeText(text);
+    toast("Training note copied.");
+  } catch {
+    toast("Clipboard access was blocked by the browser.");
+  }
+});
+
+renderTrainingList();
+if (training.length) {
+  selectTraining(training[0].id);
+} else {
+  showTrainingEmptyState();
+}
+
+window.addEventListener("beforeunload", () => {
+  clearTimeout(trainingSaveTimer);
+  saveActiveTraining();
+});
+})();
+  </script>
+ </body>
+</html>
