@@ -1,6 +1,12 @@
 # Personal Workspace
 A feature-packed Personal Workspace with a Concentrix-themed palette.
 
+# **HOW TO DOWNLOAD**
+## STEP 1
+<img width="1920" height="911" alt="image" src="https://github.com/user-attachments/assets/d986b771-c1d7-4ad7-b4cb-55e5ce208f2b" />
+## STEP 2
+<img width="1920" height="911" alt="image" src="https://github.com/user-attachments/assets/0bd216c7-5901-4153-a9c3-35b8eaad99a5" />
+
 # Features
 ## Dark/Light Mode
 - Dark and Light mode options for your viewing pleasure (or displeasure if you use Light Mode... :P)
